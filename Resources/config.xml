@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../engine/Shopware/Components/Plugin/schema/config.xsd">
+    <elements>
+        <element scope="locale">
+            <name>shopIsawesome</name>
+            <label>Is your shop awesome?</label>
+            <value>false</value>
+            <description>Check to make your shop awesome</description>
+        </element>
+    </elements>
+</config>

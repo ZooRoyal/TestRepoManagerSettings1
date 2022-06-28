@@ -1,0 +1,88 @@
+/*
+*	REWE Digital GmbH
+*	IT-Verticals
+*/
+
+/* RdssExample
+========================================================================== */
+//@import "../../sass/global/variables"; // Imports if necessary
+
+
+// Component class
+$component: 'rdss-example';
+
+// Block
+%#{$component} {
+    // Block style
+    border: solid 1px red;
+}
+
+
+// Element
+.#{$component}__element {
+    // Element styles
+}
+
+
+// Modifier
+.#{$component}--modifier {
+    @extend %#{$component};
+    // Block overwrites
+
+    // Modifying declarations
+    .#{$component}__element {
+        // Element overwrites
+    }
+}
+
+
+/* media queries
+========================================================================== */
+// media query: xs
+@media screen and (min-width: 320px) {
+    // Block
+    %#{$component} {
+    }
+}
+
+// media query: sm
+@media screen and (min-width: 768px) {
+    // Block
+    %#{$component} {
+    }
+}
+
+// media query: md
+@media screen and (min-width: 992px) {
+    // Block
+    %#{$component} {
+    }
+}
+
+// media query: lg
+@media screen and (min-width: 1200px) {
+    // Block
+    %#{$component} {
+    }
+}
+
+// media query: xl
+@media screen and (min-width: 1200px) {
+    // Block
+    %#{$component} {
+    }
+}
+
+// media query: xxl
+@media screen and (min-width: 1400px) {
+    // Block
+    %#{$component} {
+    }
+}
+
+
+/* component classes
+========================================================================== */
+.#{$component} {
+    @extend %#{$component};
+}

@@ -1,0 +1,25 @@
+{
+    "minMsi": 60,
+    "minCoveredMsi": 80,
+    "timeout": 10,
+    "source": {
+        "directories": [
+            "."
+        ],
+        "excludes": [
+            "custom",
+            "vendor",
+            "Tests",
+            "node_modules",
+            "Resources"
+        ]
+    },
+    "logs": {
+        "text": "infection.log"
+    },
+    "mutators": {
+        "@default": true,
+        "NotIdenticalNotEqual": false,
+        "IdenticalEqual": false
+    }
+}

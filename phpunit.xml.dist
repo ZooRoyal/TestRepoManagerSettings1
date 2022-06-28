@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" colors="true" convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true" convertWarningsToExceptions="true"
+         beStrictAboutTestsThatDoNotTestAnything="false" processIsolation="false" stopOnFailure="false"
+         bootstrap="vendor/autoload.php" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory>.</directory>
+        </include>
+        <exclude>
+            <directory>vendor</directory>
+            <directory>Tests</directory>
+            <directory>custom</directory>
+            <directory>node_modules</directory>
+        </exclude>
+        <report>
+            <text outputFile="php://stdout"/>
+        </report>
+    </coverage>
+    <testsuites>
+        <testsuite name="RdssExample unit tests">
+            <directory>Tests/php</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

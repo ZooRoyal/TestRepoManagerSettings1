@@ -1,0 +1,19 @@
+# Dependant Packages and package management stuff
+/vendor/
+/node_modules/
+/composer.lock
+/package-lock.json
+
+# Editorsettings
+/.idea
+
+# Testing artifacts
+/.phpunit.result.cache
+/infection.log
+/coverage/
+
+# Mac stuff
+/.DS_Store/
+
+# installed shopware plugins
+/custom/plugins/

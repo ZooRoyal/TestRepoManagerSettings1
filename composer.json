@@ -1,0 +1,85 @@
+{
+    "name": "rdss/example",
+    "description": "Awesome example, does some pretty awesome stuff",
+    "type": "shopware-plugin",
+    "license": "proprietary",
+    "require": {
+        "php": "^7.4",
+        "composer/installers": "^1.0|^2.0",
+        "shopware/shopware": "~5.6.10|~5.7.0",
+        "setasign/fpdi": "1.6.2|2.3.6",
+        "mpdf/mpdf": "7.1.9|8.0.13"
+    },
+    "require-dev": {
+        "zooroyal/coding-standard": "^3.13",
+        "zooroyal/platformtestingbasics": "^1.1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "RdssExample\\": ""
+        },
+        "classmap": [
+            "Controllers"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RdssExample\\Tests\\": "Tests/php/"
+        }
+    },
+    "scripts": {
+        "test": "infection -n -s --threads=4 --only-covered --no-progress",
+        "phpunit": "phpunit -c phpunit.xml.dist --colors=always",
+        "style-check": "coding-standard sca:all"
+    },
+    "repositories": {
+        "packagist.org": false,
+        "setasign-fpdi": {
+            "type": "package",
+            "canonical": false,
+            "package": {
+                "__comment": "use 2.3.6 as 1.6.2",
+                "name": "setasign/fpdi",
+                "version": "1.6.2",
+                "type": "library",
+                "require": {
+                    "php": "^5.6 || ^7.0 || ^8.0",
+                    "ext-zlib": "*"
+                },
+                "source": {
+                    "url": "https://github.com/Setasign/FPDI.git",
+                    "type": "git",
+                    "reference": "6231e31"
+                }
+            }
+        },
+        "mpdf-mpdf": {
+            "type": "package",
+            "canonical": false,
+            "package": {
+                "__comment": "use 8.0.7 as 7.1.9",
+                "name": "mpdf/mpdf",
+                "version": "7.1.9",
+                "type": "library",
+                "source": {
+                    "url": "https://github.com/mpdf/mpdf.git",
+                    "type": "git",
+                    "reference": "7daf07f"
+                }
+            }
+        },
+        "private-packagist": {
+            "type": "composer",
+            "url": "https://repo.packagist.com/zooroyal/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "infection/extension-installer": true,
+            "composer/installers": true,
+            "mindplay/composer-locator": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
+        }
+    }
+}

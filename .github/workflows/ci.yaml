@@ -1,0 +1,97 @@
+name: CI
+on:
+   pull_request:
+   push:
+      branches:
+          - master
+   schedule:
+        - cron: '0 0 * * 0'
+
+jobs:
+  ci:
+    name: CI
+    runs-on:
+        - ubuntu-latest
+
+    strategy:
+        matrix:
+            php_version:
+                - 7.4
+
+            node_version:
+                - 14
+
+            composer_parameters:
+                - '--prefer-lowest'
+                - ' '
+            shopware_version:
+                - "~5.6.10"
+                - "~5.7.7"
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: setup php
+        uses: shivammathur/setup-php@v2
+        with:
+           php-version: ${{ matrix.php_version }}
+           extensions: xdebug, gd
+           tools: composer:v2
+
+      - name: get composer cache dir
+        id: composer-cache
+        run: |-
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: |-
+            ${{ runner.os }}-composer-
+
+      - name: install packagist token
+        env:
+          PACKAGIST_USER: ${{ secrets.PACKAGIST_USER }}
+          PACKAGIST_TOKEN: ${{ secrets.PACKAGIST_TOKEN }}
+        run: |-
+          composer config --global --auth http-basic.repo.packagist.com $PACKAGIST_USER $PACKAGIST_TOKEN
+
+      - name: install dependencies and override shopware version
+        run: |-
+            composer require ${{ matrix.composer_parameters }} shopware/shopware:${{ matrix.shopware_version }}
+
+      - name: "Determine npm cache directory"
+        id: "determine-npm-cache-directory"
+        run: "echo \"::set-output name=directory::$(npm config get cache)\""
+
+      - name: cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+
+      - name: setup nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node_version }}
+
+      - name: install node dependencies
+        run: |-
+          npm install --no-package-lock
+
+      - name: run codestyle-checks
+        run: |-
+          composer style-check
+
+      - name: run tests
+        env:
+          XDEBUG_MODE: coverage
+        run: |-
+          composer test
