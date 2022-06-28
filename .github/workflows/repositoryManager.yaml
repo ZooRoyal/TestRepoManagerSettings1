@@ -1,0 +1,31 @@
+name: RepositoryManager
+on:
+    pull_request:
+    push:
+        branches:
+            - master
+    schedule:
+        - cron: '0 0 * * 0'
+
+jobs:
+    ci:
+        name: RepositoryManager
+        runs-on:
+            - ubuntu-latest
+
+        steps:
+            -   name: checkout repo
+                uses: actions/checkout@v2
+                with:
+                    submodules: true
+                    token: ${{ secrets.GITHUB_TOKEN }}
+            -   name: run repo-manager
+                uses: andrewthetechie/gha-repo-manager@v1.1.0
+                with:
+                    # Apply your settings to the repo, can also be check to just check repo settings vs your file or validate, to validate your
+                    # file is valid
+                    action: apply
+                    #              repo: zooroyal/RdssExample
+                    settings_file: .github/settings.yml
+                    # need  PAT that can edit repo settings
+                    token: ${{ secrets.GHA_TOKEN }}
