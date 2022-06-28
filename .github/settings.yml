@@ -1,0 +1,27 @@
+# settings.yml can live in two places:
+# 1. in the repo itself
+# 2. in a centralized repo
+
+# The Action is able to apply settings to any repo that its token can manage
+# You can run Action from each repo, acting on that repo's settings.yml, or
+# from a central repo, using a single settings.yml to control many repos.
+
+# Which method you choose is up to you. See README.md for more info and example
+# Workflows to implement these strategies.
+settings:
+  # See https://docs.github.com/en/rest/reference/repos#update-a-repository for all available settings.
+  # any of these settings can be ommitted to just leave the repo's current setting
+  # If a setting has a value in settings.yml, it will always overwrite what exists in the repo.
+
+  # A short description of the repository that will show up on GitHub. Set to an empty string to clear.
+  #  description: description of repo
+
+  # A URL with more information about the repository. Set to an empty string to clear.
+  #  homepage: https://example.github.io/
+
+  # A list of strings to apply as topics on the repo. Set to an empty string to clear topics. Omit or set to null to leave what repo already has
+  #  topics:
+
+
+  # Either `true` to make the repository private, or `false` to make it public.
+  private: false
