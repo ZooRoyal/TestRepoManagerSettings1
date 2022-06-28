@@ -29,3 +29,13 @@ jobs:
                     settings_file: .github/settings.yml
                     # need  PAT that can edit repo settings
                     token: ${{ secrets.GHA_TOKEN }}
+            -   name: run repo-manager-global
+                uses: andrewthetechie/gha-repo-manager@v1.1.0
+                with:
+                    # Apply your settings to the repo, can also be check to just check repo settings vs your file or validate, to validate your
+                    # file is valid
+                    action: apply
+                    repo: zooroyal/RdssExample
+                    settings_file: .github/settings.yml
+                    # need  PAT that can edit repo settings
+                    token: ${{ secrets.GHA_TOKEN }}
